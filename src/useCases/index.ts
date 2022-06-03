@@ -1,3 +1,13 @@
-import { createUserController } from './create';
+import { 
+  createUserController,
+  createPatientController, 
+  createConsultController,
+  createEmployeeController,
+} from './create';
 
-export { createUserController };
+export { 
+  createUserController,
+  createPatientController,
+  createConsultController, 
+  createEmployeeController,
+};

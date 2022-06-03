@@ -3,8 +3,7 @@ import {
   Column, 
   ManyToOne, 
   JoinColumn, 
-  PrimaryColumn, 
-  CreateDateColumn, 
+  PrimaryColumn,  
 } from "typeorm"
 import { Patients } from './Patients';
 
@@ -13,15 +12,15 @@ export class Consults {
   @PrimaryColumn()
   id: string;
 
+  @Column({ type: 'timestamp' })
+	createdAt: Date;
+
   @Column()
-  patient: string;
+  patient_id: string;
 
   @ManyToOne(() => Patients, {
 		onDelete: 'CASCADE'
 	})
-  @JoinColumn({ name: 'patient' })
+  @JoinColumn({ name: 'patient_id' })
 	patients: Patients;
-
-  @CreateDateColumn({ type: 'timestamp' })
-	createdAt: Date;
 }
