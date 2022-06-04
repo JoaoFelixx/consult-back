@@ -20,13 +20,11 @@ export async function createConsultController(request: Request, response: Respon
       const result = await createConsult(consult);
 
       return response.status(201).json(result);
-
     }
 
     return response.status(400).json('Date is invalid');
 
   } catch (error) {
-    console.log(error.message)
-    response.sendStatus(409);
+    response.sendStatus(400);
   }
 }

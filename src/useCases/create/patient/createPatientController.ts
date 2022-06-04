@@ -24,6 +24,6 @@ export async function createPatientController(request: Request, response: Respon
     return response.status(201).json(result);
 
   } catch (error) {
-    response.sendStatus(409);
+    response.sendStatus(400);
   }
 }

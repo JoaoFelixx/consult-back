@@ -22,6 +22,6 @@ export async function createEmployeeController(request: Request, response: Respo
     return response.status(201).json({ name: result.name });
 
   } catch (error) {
-    response.sendStatus(409);
+    response.sendStatus(400);
   }
 }

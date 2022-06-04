@@ -29,6 +29,6 @@ export async function createUserController(request: Request, response: Response)
     return response.status(201).json({ id: result.id });
 
   } catch (error) {
-    response.sendStatus(409);
+    response.sendStatus(400);
   }
 }
