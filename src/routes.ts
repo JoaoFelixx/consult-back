@@ -19,6 +19,7 @@ const routes = Router();
 
 routes.get('/consults', getConsultsController);
 routes.get('/patients', getPatientsController);
+routes.get('/employees', getEmployeesController);
 
 routes.post('/users', createUserController);
 routes.post('/consults', createConsultController);
@@ -32,7 +33,6 @@ routes.put('/consults/:id', updateConsultController);
 
 routes.use(middlewareJwt);
 
-routes.get('/employees', getEmployeesController);
 routes.post('/employees', createEmployeeController);
 routes.delete('/employees/:id', deleteEmployeeController);
 
