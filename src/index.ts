@@ -1,7 +1,18 @@
-//import cluster from "cluster";
-//import { cpus } from "os";
-import { application } from "./app";
+import cluster from 'cluster';
+import { cpus } from 'os';
+import { application } from './app';
 
 const PORT = process.env.PORT || 4545;
+const numCPUs = cpus().length;
 
-application.listen(PORT, () => console.log(`Server running at port: ${PORT}`))
+if (cluster.isPrimary) {
+
+  for (let i = 0; i < numCPUs; i++) {
+    cluster.fork();
+  }
+
+  cluster.on('exit', (worker, code, signal) => cluster.fork());
+
+} else {
+  application.listen(PORT);
+}
