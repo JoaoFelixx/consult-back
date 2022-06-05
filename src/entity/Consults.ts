@@ -13,7 +13,7 @@ export class Consults {
   id: string;
 
   @Column({ type: 'timestamp' })
-	createdAt: Date;
+	consultDate: Date;
 
   @Column()
   patient_id: string;

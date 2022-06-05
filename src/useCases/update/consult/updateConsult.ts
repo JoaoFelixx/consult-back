@@ -8,7 +8,7 @@ export async function updateConsult(consultReq: Consult): Promise<Error | Consul
   const consultRegistered = await consultRepo.findOneBy({ id: consultReq.id });
 
   if (!consultRegistered)
-    return new Error('Employee does not registered');
+    return new Error('Consult does not registered');
 
   const consultUpdated = {
     ...consultRegistered,

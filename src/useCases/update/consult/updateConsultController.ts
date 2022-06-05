@@ -6,9 +6,9 @@ export async function updateConsultController(request: Request, response: Respon
   try {
     request.body.id = request.params.id;
 
-    const { id, createdAt, patient_id } = request.body as Consult;
+    const { id, consultDate, patient_id } = request.body as Consult;
 
-    const propertyNames = Object.getOwnPropertyNames({ id, createdAt, patient_id });
+    const propertyNames = Object.getOwnPropertyNames({ id, consultDate, patient_id });
     const amountInvalid = propertyNames
       .map(property => (!!request.body[property]) ? null : `${property} is missing`)
       .filter(item => !!item)
@@ -24,7 +24,6 @@ export async function updateConsultController(request: Request, response: Respon
     return response.status(202).json(result);
 
   } catch (error) {
-    console.log(error);
     response.sendStatus(400);
   }
 }

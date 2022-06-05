@@ -13,7 +13,7 @@ interface Patient {
 interface Consult {
   id: string;
   patient_id: string;
-  createdAt: Date;
+  consultDate: Date;
 }
 
 interface Employee {

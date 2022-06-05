@@ -5,24 +5,31 @@ import { createConsult } from './createConsult';
 
 export async function createConsultController(request: Request, response: Response) {
   try {
-    const { createdAt, patient_id } = request.body as Omit<Consult, 'id'>;
+    const { consultDate, patient_id } = request.body as Omit<Consult, 'id'>;
 
     if (!patient_id)
       return response.status(400).json('ID is missing');
 
-    if (new Date(createdAt) instanceof Date) {
-      const consult: Consult = {
-        id: uuid(),
-        createdAt,
-        patient_id
-      }
+    const isValidDate = (new Date(consultDate) instanceof Date);
 
-      const result = await createConsult(consult);
+    if (!isValidDate)
+      return response.status(400).json('Date is invalid');
 
-      return response.status(201).json(result);
+    const consultIsPossible = (new Date(consultDate).getTime() > new Date().getTime());
+    const isServiceHour = (new Date(consultDate).getHours() > 8 || new Date(consultDate).getHours() < 17)
+
+    if (!consultIsPossible || !isServiceHour)
+      return response.status(400).json('Consult date is invalid');
+
+    const consult: Consult = {
+      id: uuid(),
+      patient_id,
+      consultDate,
     }
 
-    return response.status(400).json('Date is invalid');
+    const result = await createConsult(consult);
+
+    return response.status(201).json(result);
 
   } catch (error) {
     response.sendStatus(400);
